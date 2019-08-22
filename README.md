@@ -7,7 +7,7 @@
 # *Importante*
 
 WebScrapping deve ser feito dentro das diretrizes da lei seguindo todas as políticas de privacidade e uso de dados de quem cede os dados.
-Esse projeto utiliza o site letras.com para coleta de daos e segue todas as políticas de uso do site.
+Esse projeto utiliza o site letras.mus.br para coleta de daos e segue todas as [políticas de uso do site](https://www.letras.mus.br/aviso-legal.html).
 
 ### Descrição
 
