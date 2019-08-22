@@ -33,8 +33,9 @@ app.get("/searchAllArtists", async function (req, res) {
 
     //formatt list of all artists on website
     console.log("################### Formatting urls for search ###################");
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    const genUri = (l) => `https://www.letras.com/letra/${l}/artistas.html`;
+    // for name artists starting with 1-9
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1'.split('');
+    const genUri = (l) => `https://www.letras.mus.br/letra/${l}/artistas.html`;
     console.log("Urls: ", alphabet);
     
     await setTimeout(() => {}, 3000);
@@ -101,16 +102,6 @@ function getArtists(html) {
 
     return artists;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 // ---------------------------------
