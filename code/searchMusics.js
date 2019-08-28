@@ -6,8 +6,10 @@ const fs = require('fs');
 const request = require('request');
 
 routes.get("/searchMusics", async function (req, res) {
+    let pageSize = 1;
+    let offset = 0;
     
-    let allArtists = await models.artist.findAll({where: {}, limit: 1, offset: 0});
+    let allArtists = await models.artist.findAll({where: {}, limit: pageSize, offset: offset});
     
     console.log(allArtists);
 
