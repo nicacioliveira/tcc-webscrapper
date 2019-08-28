@@ -4,6 +4,8 @@ var app = express();
 
 const searchArtists = require('./code/searchArtists');
 const searchMusics = require('./code/searchMusics');
+const searchMusicalGenders = require('./code/searchMusicalGenders');
+const artistsGenrersClassifier = require('./code/artistsGenrersClassifier');
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -13,6 +15,8 @@ app.use((req, res, next) => {
 
 app.use(searchArtists);
 app.use(searchMusics);
+app.use(searchMusicalGenders);
+app.use(artistsGenrersClassifier);
 
 // ---------------------------------
 
