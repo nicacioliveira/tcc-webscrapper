@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const MusicalGenrers = sequelize.define('musical_genrers', {
         name: DataTypes.STRING,
+        gender_url: DataTypes.STRING,
         created_at: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW
