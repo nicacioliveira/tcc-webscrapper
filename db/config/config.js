@@ -8,7 +8,7 @@ module.exports = {
         pool: {
             max: 100,
             min: 0,
-            idle: 10000
+            acquire: 100*1000
         },
         define: { 
             charset: 'utf8', 
