@@ -17,7 +17,8 @@
     "express": "^4.17.1",
     "mysql2": "^1.6.5",
     "request": "^2.88.0",
-    "sequelize": "^5.15.1"
+    "sequelize": "^5.15.1",
+    "wikijs": "^6.0.0"
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0"

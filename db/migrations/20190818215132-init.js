@@ -24,6 +24,9 @@ module.exports = {
           type: Sequelize.DATE,
           defaultValue: new Date()
         }
+      }, {
+        charset: 'utf8',
+        collate: 'utf8_unicode_ci'
       }
     );
 
@@ -44,6 +47,9 @@ module.exports = {
           type: Sequelize.DATE,
           defaultValue: new Date()
         }
+      }, {
+        charset: 'utf8',
+        collate: 'utf8_unicode_ci'
       }
     );
 

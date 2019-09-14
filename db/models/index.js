@@ -12,7 +12,8 @@ const db = {
 db.models = {
     artist: sequelize.import('./artist.js'),
     musical_genrer: sequelize.import('./musical_genrer.js'),
-    artists_musical_genrers: sequelize.import('./artists_musical_genrers.js')
+    artists_musical_genrers: sequelize.import('./artists_musical_genrers.js'),
+    music: sequelize.import('./music.js')
 };
 
 Object.keys(db.models)

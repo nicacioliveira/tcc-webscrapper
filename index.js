@@ -6,7 +6,7 @@ const searchArtists = require('./code/searchArtists');
 const searchMusics = require('./code/searchMusics');
 const searchMusicalGenders = require('./code/searchMusicalGenders');
 const artistsGenrersClassifier = require('./code/artistsGenrersClassifier');
-
+const artistsGetMeta = require('./code/artistsGetMeta');
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-type');
@@ -17,6 +17,7 @@ app.use(searchArtists);
 app.use(searchMusics);
 app.use(searchMusicalGenders);
 app.use(artistsGenrersClassifier);
+app.use(artistsGetMeta);
 
 // ---------------------------------
 
