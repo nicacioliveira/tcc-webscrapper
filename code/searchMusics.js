@@ -134,4 +134,122 @@ function getMusicList(d) {
     return artists;
 }
 
+routes.get("/searchLyricsOfMusics", async function (req, res) {
+
+    let page = 556;
+    let limit = 60;
+    let offset = (page-1) * limit;
+    let musicCount = await models.music.findAndCountAll();
+    let totalOfPages = Math.round(musicCount.count / limit);
+
+    console.log(`------------SEARCHING PAGE ${page}/${totalOfPages}--------------`);
+    await getLyricsProcedure(page, offset, limit, totalOfPages);
+    
+
+    res.send('ok');
+    
+});
+
+async function getLyricsProcedure(page, offset, limit, totalOfPages) {
+    
+    let pagePromises = [];
+
+    try {
+    
+        let musics = await models.music.findAll({offset, limit});
+        let numberOfSuccess = 0;
+        const genUri = (l) => `https://www.letras.mus.br${l}`;
+        
+        musics.forEach(m => {
+            let uri = genUri(m.url);
+                //process.stdout.write(` ${genUri(m.url)} `);
+
+            pagePromises.push(
+                new Promise((resolve, reject) => {
+                    request({uri}, async (error, response, body) => {
+
+                    if (error) {
+                        //console.log(`request failure for: ${m.name} | successes/total: ${numberOfSuccess}/${musics.length}`);
+                        reject(error);
+                    } else {
+                        numberOfSuccess+=1;
+                        //console.log(`request success for: ${m.name} | successes/total: ${numberOfSuccess}/${musics.length}`);
+                        
+                        let music = await getMusicLyric({m, body});
+            
+                        await music.save().then(ok => {
+                            //console.log(`music ${music.name} saved! successes/total: ${numberOfSuccess}/${musics.length}`);
+                            resolve({m, body});
+                        }).catch(err => {
+                            //console.error(`music ${music.name} save error! successes/total: ${numberOfSuccess}/${musics.length}`);
+                            resolve({m, body});
+                        });
+                        
+                    }
+                    
+                })})
+            );
+        });
+    } catch (error) {
+        console.log(`tentando novamente a página ${page}`);
+        getLyricsProcedure(page, offset, limit, totalOfPages);
+    }
+
+    Promise.all(pagePromises).then(e => {
+        
+        if (page < totalOfPages) {
+            page += 1;
+            offset = (page-1) * limit;
+            console.log(`------------SEARCHING PAGE ${page}/${totalOfPages}--------------`)
+            getLyricsProcedure(page, offset, limit, totalOfPages);
+        } else {
+            console.log(`------------FINISH--------------`);
+            return "ok";
+        }
+    }).catch(err => {
+        console.log("erro catch promisses")
+        console.log(`tentando novamente a página ${page}`);
+        getLyricsProcedure(page, offset, limit, totalOfPages);
+    });
+}
+
+function getMusicLyric(d) {
+    let html = d.body;
+    let music = d.m;
+    let $ = undefined;
+
+    if (html)
+        $ = cheerio.load(html);
+    else {
+        return null;
+    }
+
+    let lyric = "";
+    try {
+        $('div.cnt-letra').each((i, el) => {
+            let divBody = el.childNodes;
+            if (!divBody)
+                return null;
+            divBody.forEach(node => {
+                if (node.type === "tag" && node.name === "p") {
+                    node.children.forEach(e => {
+                        if (e.type === "text" && e.data && e.nodeValue) {
+                            lyric += e.data;
+                        } else if (e.type === "tag" && e.tagName === "br") {
+                            lyric += '\n';
+                        }
+                    });
+                    lyric += '\n\n ';
+    
+                }
+            });
+        });   
+    } catch (error) {
+        return null;
+    }
+    music.lyric = lyric;
+
+    return music;
+}
+
 module.exports = routes;
