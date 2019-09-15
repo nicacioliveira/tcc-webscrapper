@@ -136,7 +136,7 @@ function getMusicList(d) {
 
 routes.get("/searchLyricsOfMusics", async function (req, res) {
 
-    let page = 556;
+    let page = 1;
     let limit = 60;
     let offset = (page-1) * limit;
     let musicCount = await models.music.findAndCountAll();
