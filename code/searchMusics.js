@@ -1,12 +1,9 @@
-const express = require('express');
-const routes = express.Router();
 const models = require('../db/models').models;
 const { Op } = require('sequelize');
 const cheerio = require('cheerio');
-const fs = require('fs');
 const request = require('request');
 
-routes.get("/searchMusics", async function (req, res) {
+async function run() {
 
     let page = 8;
     let limit = 150;
@@ -92,10 +89,10 @@ routes.get("/searchMusics", async function (req, res) {
 
         })
 
-        res.send(allArtists);
+        //console.log(allArtists);
     });
 
-});
+};
 
 function getMusicList(d) {
     let html = d.body;
@@ -134,7 +131,7 @@ function getMusicList(d) {
     return artists;
 }
 
-routes.get("/searchLyricsOfMusics", async function (req, res) {
+function runSearchLyricsOfMusics() {
 
     let page = 1;
     let limit = 60;
@@ -145,10 +142,8 @@ routes.get("/searchLyricsOfMusics", async function (req, res) {
     console.log(`------------SEARCHING PAGE ${page}/${totalOfPages}--------------`);
     await getLyricsProcedure(page, offset, limit, totalOfPages);
     
-
-    res.send('ok');
-    
-});
+    console.log("ok")
+};
 
 async function getLyricsProcedure(page, offset, limit, totalOfPages) {
     
@@ -252,4 +247,5 @@ function getMusicLyric(d) {
     return music;
 }
 
-module.exports = routes;
+//run();
+//runSearchLyricsOfMusics();

@@ -1,11 +1,8 @@
-const express = require('express');
-const routes = express.Router();
 const models = require('../db/models').models;
 const cheerio = require('cheerio');
-const fs = require('fs');
 const request = require('request');
 
-routes.get("/classify", async function (req, res) {
+async function run() {
     
     console.log(`finding all musical genders...`);
     await setTimeout(()=>{}, 3000);
@@ -41,8 +38,7 @@ routes.get("/classify", async function (req, res) {
     console.log('-------------------------Done---------------------');
     console.log('--------------------------------------------------');
 
-    res.send('ok');
-});
+};
 
 function processPromises(result) {
     console.log('--------------------------------------------------');
@@ -83,4 +79,4 @@ function getArtists(html) {
     return artists;
 }
 
-module.exports = routes;
+//run();

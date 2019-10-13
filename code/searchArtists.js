@@ -1,11 +1,8 @@
-const express = require('express');
-const routes = express.Router();
 const models = require('../db/models').models;
 const cheerio = require('cheerio');
-const fs = require('fs');
 const request = require('request');
 
-routes.get("/searchAllArtists", async function (req, res) {
+async function run() {
     console.log("################### Searching All artists in website letras.com ###################");
 
     //formatt list of all artists on website
@@ -52,15 +49,12 @@ routes.get("/searchAllArtists", async function (req, res) {
                     console.log(`Bulk ${index + 1} saved.`);
                 })
             }, 5000);
-        })
-
-        
-        res.send(response);
+        });
 
     }).catch( (err) => {
-        res.send(err);
+        console.log(err);
     });
-});
+};
 
 function getArtists(html) {
     let $ = cheerio.load(html);
@@ -80,4 +74,4 @@ function getArtists(html) {
     return artists;
 }
 
-module.exports = routes;
+//run()

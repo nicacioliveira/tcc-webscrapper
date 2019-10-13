@@ -1,11 +1,8 @@
-const express = require('express');
-const routes = express.Router();
 const models = require('../db/models').models;
 const cheerio = require('cheerio');
-const fs = require('fs');
 const request = require('request');
 
-routes.get("/searchMusicalGenders", async function (req, res) {
+async function run() {
     
     const url = 'https://www.letras.mus.br/estilos/';
 
@@ -26,10 +23,10 @@ routes.get("/searchMusicalGenders", async function (req, res) {
         models.musical_genrer.bulkCreate(genders, {}).then(resp => {
             console.log(`Bulk saved.`);
         }).finally(() => {
-            res.send(genders);
+            console.log(genders)
         });
     });
-});
+};
 
 function getMusicaGenders(html) {
     let $ = cheerio.load(html);
@@ -49,4 +46,4 @@ function getMusicaGenders(html) {
     return genders;
 }
 
-module.exports = routes;
+//run();
