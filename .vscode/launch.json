@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Server",
-            "program": "${workspaceFolder}/index.js",
+            "program": "${workspaceFolder}/code/searchMusicsYears.js",
             "cwd": "${workspaceFolder}",
             "restart": true,
         },
