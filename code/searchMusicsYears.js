@@ -136,7 +136,7 @@ async function run() {
     
         console.log(`page: ${musicPage}, offset: ${offset}`);
         await sequelize
-        .query(`SELECT m.id as id, m.name as music, a.name as artist FROM music m INNER JOIN artists a ON m.artist_id = a.id INNER JOIN artists_musical_genrers AS amg ON amg.artist_id = a.id INNER JOIN musical_genrers AS mg ON mg.name = "Forró" AND mg.id = amg.musical_genrer_id WHERE m.id > 2400`,
+        .query(`SELECT m.id as id, m.name as music, a.name as artist FROM music m INNER JOIN artists a ON m.artist_id = a.id INNER JOIN artists_musical_genrers AS amg ON amg.artist_id = a.id INNER JOIN musical_genrers AS mg ON mg.name = "Forró" AND mg.id = amg.musical_genrer_id WHERE m.id > 37008`,
          {
              raw: true
         })

@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         created_at: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW
+        },
+        year: {
+            type: DataTypes.INTEGER
         }
     }, {
         charset: 'utf8', 
