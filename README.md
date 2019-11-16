@@ -2,8 +2,6 @@
 
 ## Esse repositório é dedicado a descrever como foi feita a coleta de dados para a análise de letras de músicas
 
-## Esse repositório visa transmitir conhecimento e objetivo meramente didático
-
 # *Importante*
 
 WebScrapping deve ser feito dentro das diretrizes da lei seguindo todas as políticas de privacidade e uso de dados de quem cede os dados.
@@ -34,13 +32,6 @@ Os scripts são capazes de buscar por todos os dados do site de forma eficiente,
 Na busca pelas letras e nomes das músicas, foi necessário assistir o processo de scrapping devido a problemas de conexão com a internet e também problemas relacionados a algumas páginas não existirem ou simplesmente por limitações do computador que foi utilizado.
 
 Existem algumas limitações que precisamos lidar. Uma dessas é que se você exagerar na quantidade de logs durante a execução dos scripts, certamente irá ver em algum momento sua memória estourar e o script parar.
-
-
-
-
-
-
-
 
 Os passos do processo foram os seguintes:
 
